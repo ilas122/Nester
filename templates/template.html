@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Nester</title>
+    <style>
+      body { font-family: sans-serif; }
+      h2 { color: #888; text-align: center; margin-top: 20px; }
+      table { margin: auto; }
+      th, td { padding: 5px 10px; border: 1px solid #ccc; text-align: left;}
+      th { background: #eee; }
+      tr:nth-child(even) { background: #eee; }
+      .logout-btn { text-align: center; border-radius: 5px; color: gray; background: #888;; padding: 5px 40px; }
+    
+     
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>scan result</h2>
+      <div class="logout-btn">
+        <form action="/logout" method="post">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+      <table>
+        <tr>
+          <th>IP address</th>
+          <th>hostname</th>
+          <th>MAC address</th>
+          <th>Time</th>
+          <th>port</th>
+          <th>latency</th>
+          <th>state</th>
+        </tr>
+        {% for device in devices_list %}
+          <tr>
+            <td>{{ device.ip }}</td>
+            <td>{{ device.hostname }}</td>
+            <td>{{ device.mac }}</td>
+            <td>{{ device.timestr }}</td>
+            <td>{{ device.port }}</td>
+            <td>{{ device.latency }}</td>
+            <td>{{ device.state }}</td>
+          </tr>
+        {% endfor %}
+        {% if not devices_list %}
+          <tr>
+            <td colspan="6">No devices found</td>
+          </tr>
+        {% endif %}
+      </table>
+    </div>
+  </body>
+</html>
